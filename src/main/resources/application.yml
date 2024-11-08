@@ -1,0 +1,32 @@
+server:
+  port: 3000
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+#  http://localhost:3000/oauth2/authorization/microsoft
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          microsoft:
+            client-id:
+            client-secret:
+            authorization-grant-type: authorization_code
+            scope:
+              - openid
+              - profile
+              - email
+            redirect-uri: http://localhost:3000/login/oauth2/code/microsoft
+            provider: microsoft-provider
+
+        provider:
+          microsoft-provider:
+            user-name-attribute: sub
+            authorization-uri: https://login.microsoftonline.com/sonpqdigiex.onmicrosoft.com/oauth2/v2.0/authorize
+            token-uri: https://login.microsoftonline.com/sonpqdigiex.onmicrosoft.com/oauth2/v2.0/token
+            user-info-uri: https://graph.microsoft.com/oidc/userinfo
+            jwk-set-uri: https://login.microsoftonline.com/sonpqdigiex.onmicrosoft.com/discovery/v2.0/keys
